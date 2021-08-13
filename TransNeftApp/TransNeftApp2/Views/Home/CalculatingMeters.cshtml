@@ -1,0 +1,35 @@
+﻿@using TransNeftEnergo.DTO;
+<h2>Расчетные приборы учета</h2>
+<form method="get" action="">
+    <label>Год</label>
+    <input name="year" type="text" value="@ViewBag.year" />
+    <br />
+    <input type="submit" value="OK" />
+</form>
+@if (ViewBag.data != null)
+{
+    <p>
+        <table id="example" class="table table-striped table-bordered dt-responsive nowrap" width="100%">
+
+            <thead>
+                <tr>
+                    <th>Id расчетного прибора учета</th>
+                    <th>Точка поставки электроэнергии</th>
+                    <th>C</th>
+                    <th>По</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var i in (List<CalculatingMeterDTO>)(ViewBag.data))
+                {
+                    <tr>
+                        <td>@i.Id</td>
+                        <td>@i.PowerSupplyPointName</td>
+                        <td>@i.FromTime.ToShortDateString()</td>
+                        <td>@i.ToTime.ToShortDateString()</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </p>
+}

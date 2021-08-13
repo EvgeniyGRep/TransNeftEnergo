@@ -1,0 +1,71 @@
+﻿@using TransNeftEnergo.DTO;
+@using TransNeftEnergo.Models;
+@if (ViewBag.Message != null)
+{
+    var p = (PowerMeasuringPoint)(ViewBag.NewEntity);
+    @ViewBag.Message
+    <br />
+    <text>Id:@p.Id</text>
+    <br />
+    <text>Наименование:@p.Name</text>
+    <br />
+    <text>Объект потребления:@p.ConsumptionObject.Name</text>
+    <br />
+    <text>Счетчик электроэнергии:@p.CurrentMeter.Number</text>
+    <br />
+    <text>Трансформатор тока:@p.CurrentTransformer.Number</text>
+    <br />
+    <text>Трансофрматор напряжения:@p.VoltageTransformer.Number</text>
+    <br />
+    <a href="">Добавить еще</a>
+}
+else
+{
+    <form method="post" action="">
+        <label>Наименование</label>
+        <input type="text" name="Name" />
+        <br />
+        <label>Объект потребления</label>
+        <select name="ConsumptionObjectId">
+            @{ var consObjects = (List<IdName>)(ViewBag.consObjects);
+                foreach (var cm in consObjects)
+                {
+                    <option value="@cm.Id">@cm.Name</option>
+                }
+            }
+        </select>
+        <br />
+        <label>Счетчик электроэнергии</label>
+        <select name="CurrentMeterId">
+            @{ var currentMeters = (List<IdNumber>)(ViewBag.currentMeters);
+                foreach (var cm in currentMeters)
+                {
+                    <option value="@cm.Id">@cm.Number</option>
+                }
+            }
+        </select>
+        <br />
+        <label>Трансформатор тока</label>
+        <select name="CurrentTransformerId">
+            @{ var currentTransformers = (List<IdNumber>)(ViewBag.currentTransformers);
+                foreach (var cm in currentTransformers)
+                {
+                    <option value="@cm.Id">@cm.Number</option>
+                }
+            }
+        </select>
+        <br />
+        <label>Трансформатор напряжения</label>
+        <select name="VoltageTransformerId">
+            @{ var voltageTransformers = (List<IdNumber>)(ViewBag.voltageTransformers);
+                foreach (var cm in voltageTransformers)
+                {
+                    <option value="@cm.Id">@cm.Number</option>
+                }
+            }
+        </select>
+        <br />
+        <input type="submit" value="OK" />
+    </form>
+}
+
